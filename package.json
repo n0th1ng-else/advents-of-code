@@ -1,0 +1,23 @@
+{
+  "name": "advents-of-code",
+  "version": "1.0.0",
+  "description": "Just a dump of any advents of code I am about to go through",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@personal.github.com:n0th1ng-else/advents-of-code.git"
+  },
+  "author": "Sergey Nikitin <srg.post@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.5.0",
+    "simple-git-hooks": "^2.7.0",
+    "typescript": "^4.5.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run format"
+  }
+}
