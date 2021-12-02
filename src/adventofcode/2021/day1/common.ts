@@ -1,10 +1,3 @@
-export const readFile = async (): Promise<string[]> => {
-  const text = await Deno.readTextFile("./task.txt");
-  const lines = text.split("\n");
-  lines.pop();
-  return lines;
-};
-
 type Trend = "up" | "down" | "stay";
 
 const comparator = (
