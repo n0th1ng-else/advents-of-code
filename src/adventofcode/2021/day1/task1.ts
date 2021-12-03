@@ -1,12 +1,16 @@
 /**
- * deno run -A ./src/adventofcode/2021/day1/task1.ts
+ * deno run -A --allow-hrtime ./src/adventofcode/2021/day1/task1.ts
  */
 import { getResult } from "./common.ts";
-import { readFile } from "../../common.ts";
+import { PartId, readFile, TaskId, withTime } from "../../common.ts";
 
-const rows = await readFile(1);
+const day: TaskId = 1;
+const part: PartId = 1;
+const rows = await readFile(day);
 
 const getWindow = (lines: string[], start: number): number =>
   Number(lines[start] ?? 0);
 
-console.log("res", getResult(rows, getWindow));
+const task = () => getResult(rows, getWindow);
+
+withTime(task, day, part);
