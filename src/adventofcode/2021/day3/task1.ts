@@ -1,10 +1,12 @@
 /**
- * deno run -A ./src/adventofcode/2021/day3/task1.ts
+ * deno run -A --allow-hrtime ./src/adventofcode/2021/day3/task1.ts
  */
-import { readFile } from "../../common.ts";
+import { PartId, readFile, TaskId, withTime } from "../../common.ts";
 import { getZeroCountAt, invertBinary, toNumber } from "./common.ts";
 
-const rows = await readFile(3);
+const day: TaskId = 3;
+const part: PartId = 1;
+const rows = await readFile(day);
 
 const counter = rows[0].split("");
 
@@ -13,12 +15,12 @@ const getGammaRateAt = (rows: string[], at: number): string => {
   return zeroCount > rows.length / 2 ? "1" : "0";
 };
 
-const gammaRateParts = counter.map((_, ind) => getGammaRateAt(rows, ind));
+const task = () => {
+  const gammaRateParts = counter.map((_, ind) => getGammaRateAt(rows, ind));
+  const epsilonRateParts = invertBinary(gammaRateParts);
+  const gammaRate = toNumber(gammaRateParts);
+  const epsilonRate = toNumber(epsilonRateParts);
+  return gammaRate * epsilonRate;
+};
 
-const epsilonRateParts = invertBinary(gammaRateParts);
-
-const gammaRate = toNumber(gammaRateParts);
-
-const epsilonRate = toNumber(epsilonRateParts);
-
-console.log("res", gammaRate * epsilonRate);
+withTime(task, day, part);
