@@ -6,7 +6,8 @@ import { getZeroCountAt, invertBinary, toNumber } from "./common.ts";
 
 const day: TaskId = 3;
 const part: PartId = 1;
-const rows = await readFile(day);
+const example = false;
+const rows = await readFile(day, example);
 
 const counter = rows[0].split("");
 

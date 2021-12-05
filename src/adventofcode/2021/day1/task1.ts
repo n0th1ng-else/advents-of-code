@@ -6,7 +6,8 @@ import { PartId, readFile, TaskId, withTime } from "../../common.ts";
 
 const day: TaskId = 1;
 const part: PartId = 1;
-const rows = await readFile(day);
+const example = false;
+const rows = await readFile(day, example);
 
 const getWindow = (lines: string[], start: number): number =>
   Number(lines[start] ?? 0);

@@ -6,7 +6,8 @@ import { getZeroCountAt, toNumber } from "./common.ts";
 
 const day: TaskId = 3;
 const part: PartId = 2;
-const rows = await readFile(day);
+const example = false;
+const rows = await readFile(day, example);
 
 const getOxygenRateAt = (rows: string[], at: number) => {
   const zeroCount = getZeroCountAt(rows, at);

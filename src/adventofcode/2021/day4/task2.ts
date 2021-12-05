@@ -12,7 +12,8 @@ import {
 
 const day: TaskId = 4;
 const part: PartId = 2;
-const rows = await readFile(day);
+const example = false;
+const rows = await readFile(day, example);
 
 const task = () => {
   let { turns, boards } = parseInput(rows);
