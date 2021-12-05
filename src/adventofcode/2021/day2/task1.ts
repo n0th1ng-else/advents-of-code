@@ -6,7 +6,8 @@ import { Direction, getCommand } from "./common.ts";
 
 const day: TaskId = 2;
 const part: PartId = 1;
-const rows = await readFile(day);
+const example = false;
+const rows = await readFile(day, example);
 
 const task = () => {
   const { x, y } = rows.reduce(
