@@ -1,7 +1,7 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day4/task2.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import {
   Board,
   getBoardScore,
@@ -10,10 +10,8 @@ import {
   updateBoards,
 } from "./common.ts";
 
-const day: TaskId = 4;
-const part: PartId = 2;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const task = () => {
   let { turns, boards } = parseInput(rows);
@@ -38,4 +36,4 @@ const task = () => {
   return Number(lastTurn) * getBoardScore(lastBoard);
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

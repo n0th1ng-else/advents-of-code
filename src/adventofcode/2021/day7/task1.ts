@@ -1,13 +1,11 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day7/task1.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import { getFuel, parseInput } from "./common.ts";
 
-const day: TaskId = 7;
-const part: PartId = 1;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const getStepFuel = (start: number, end: number): number => {
   const size = Math.abs(end - start);
@@ -19,4 +17,4 @@ const task = () => {
   return getFuel(crabs, getStepFuel);
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

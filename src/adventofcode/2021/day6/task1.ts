@@ -1,13 +1,11 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day6/task1.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import { applyDay, parseInput } from "./commons.ts";
 
-const day: TaskId = 6;
-const part: PartId = 1;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const days = 80;
 
@@ -21,4 +19,4 @@ const task = () => {
   return sum;
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

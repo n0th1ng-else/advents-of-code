@@ -1,13 +1,11 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day3/task2.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import { getZeroCountAt, toNumber } from "./common.ts";
 
-const day: TaskId = 3;
-const part: PartId = 2;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const getOxygenRateAt = (rows: string[], at: number) => {
   const zeroCount = getZeroCountAt(rows, at);
@@ -45,4 +43,4 @@ const task = () => {
   return oxygenRate * co2Rate;
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

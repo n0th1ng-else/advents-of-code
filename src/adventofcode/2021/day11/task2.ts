@@ -1,13 +1,11 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day11/task2.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import { experienceFlash, parseInput, renderFlashes } from "./common.ts";
 
-const day: TaskId = 11;
-const part: PartId = 2;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const task = () => {
   const data = parseInput(rows);
@@ -23,4 +21,4 @@ const task = () => {
   return step;
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

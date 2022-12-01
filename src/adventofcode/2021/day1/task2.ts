@@ -2,12 +2,10 @@
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day1/task2.ts
  */
 import { getResult } from "./common.ts";
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 
-const day: TaskId = 1;
-const part: PartId = 2;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const getWindow = (lines: string[], start: number): number | null => {
   const size = lines.length;
@@ -22,4 +20,4 @@ const getWindow = (lines: string[], start: number): number | null => {
 
 const task = () => getResult(rows, getWindow);
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

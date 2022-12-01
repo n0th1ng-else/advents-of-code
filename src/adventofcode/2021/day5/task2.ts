@@ -1,7 +1,7 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day5/task2.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import {
   calculateBadPlaces,
   getId,
@@ -13,10 +13,8 @@ import {
   VetLine,
 } from "./common.ts";
 
-const day: TaskId = 5;
-const part: PartId = 2;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const getDiagonalLines = (items: VetLine[]): VetLine[] =>
   items.filter((line) => !isLineStraight(line));
@@ -61,4 +59,4 @@ const task = () => {
   return calculateBadPlaces(fullMap);
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);

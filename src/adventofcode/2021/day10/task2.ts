@@ -1,17 +1,15 @@
 /**
  * deno run -A --allow-hrtime ./src/adventofcode/2021/day10/task2.ts
  */
-import { PartId, readFile, TaskId, withTime } from "../../common.ts";
+import { readFileByPath, execWithTime } from "../../common.ts";
 import {
   getClosingChar,
   getOpeningChar,
   getOpeningCharScore,
 } from "./common.ts";
 
-const day: TaskId = 10;
-const part: PartId = 2;
-const example = false;
-const rows = await readFile(day, example);
+const thisFile = new URL("", import.meta.url).pathname;
+const rows = await readFileByPath(thisFile);
 
 const getCompletionList = (row: string): string[] => {
   try {
@@ -52,4 +50,4 @@ const task = () => {
   return s[Math.floor(s.length / 2)];
 };
 
-withTime(task, day, part);
+execWithTime(task, thisFile);
