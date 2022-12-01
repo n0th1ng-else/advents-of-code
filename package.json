@@ -4,6 +4,7 @@
   "description": "Just a dump of any advents of code I am about to go through",
   "main": "index.js",
   "scripts": {
+    "aoc": "deno run --allow-run ./src/adventofcode/exec.ts",
     "format": "prettier --write ."
   },
   "repository": {
