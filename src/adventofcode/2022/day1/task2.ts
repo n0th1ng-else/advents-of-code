@@ -1,5 +1,5 @@
 /**
- * deno run -A --allow-hrtime ./src/adventofcode/2022/day1/task1.ts
+ * npm run aoc 2022 1 2
  */
 import { execWithTime, readFileByPath } from "../../common.ts";
 
