@@ -12,7 +12,10 @@ export const readFileByPath = async (
   return lines;
 };
 
-export const execWithTime = (handler: () => number, path: string): void => {
+export const execWithTime = (
+  handler: () => number | string,
+  path: string
+): void => {
   const parts = path.split("/");
   const year = parts.at(-3);
   const day = parts.at(-2);
