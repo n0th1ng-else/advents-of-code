@@ -21,7 +21,7 @@ const inputFile = [
   isSample ? "sample.txt" : "task.txt",
 ].join("/");
 
-console.log("Looking at the executor:", inputFile);
+console.log("Looking at the executor:", taskFile);
 const module = await import(taskFile);
 
 if (!module) {
@@ -34,7 +34,7 @@ const text = await Deno.readTextFile(inputFile);
 const lines = text.split("\n");
 lines.pop();
 
-console.log("Running the task:", inputFile);
+console.log("Running the task:", taskFile);
 const task = module.default || module.task;
 
 execWithTime(() => task(lines), taskFile);
