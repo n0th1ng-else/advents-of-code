@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@personal.github.com:n0th1ng-else/advents-of-code.git"
+    "url": "git@github.com:n0th1ng-else/advents-of-code.git"
   },
   "author": "Sergey Nikitin <srg.post@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^2.8.0",
-    "simple-git-hooks": "^2.8.1",
-    "typescript": "^4.9.3"
+    "prettier": "^3.1.0",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.3.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npm run format"

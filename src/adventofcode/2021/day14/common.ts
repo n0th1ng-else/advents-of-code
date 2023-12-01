@@ -46,7 +46,7 @@ export const parseInput = (rows: string[]) => {
 const adjustElement = (
   net: Record<string, number>,
   seq: string,
-  adjuster: number
+  adjuster: number,
 ) => {
   if (!net[seq]) {
     net[seq] = 0;
@@ -61,13 +61,13 @@ const adjustElements = (
   net: Record<string, number>,
   char1: string,
   char2 = "",
-  adjuster: number
+  adjuster: number,
 ) => adjustElement(net, `${char1}${char2}`, adjuster);
 
 export const doStep = (
   net: Record<string, number>,
   rules: Record<string, Rule>,
-  stat: Record<string, number>
+  stat: Record<string, number>,
 ) => {
   const n = { ...net };
   Object.keys(net).forEach((seq) => {

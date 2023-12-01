@@ -25,7 +25,7 @@ const task = () => {
     {
       current: 0,
       max: 0,
-    }
+    },
   );
 
   return stats.max;

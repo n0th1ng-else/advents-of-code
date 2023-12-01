@@ -45,7 +45,7 @@ export const parseInput = (rows: string[]): [Paper, Fold[]] => {
       collectFolds: false,
       net: {},
       folds: [],
-    }
+    },
   );
 
   return [net, folds];
@@ -67,7 +67,7 @@ export const getSize = (net: Paper): TwoD =>
         y: Math.max(res.y, y),
       };
     },
-    { x: 0, y: 0 }
+    { x: 0, y: 0 },
   );
 
 export const countDots = (net: Paper): number =>

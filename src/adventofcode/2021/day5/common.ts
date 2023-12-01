@@ -42,7 +42,7 @@ export const getStraightLines = (items: VetLine[]): VetLine[] =>
 export const updateMapStraightLines = (
   map: Record<string, number>,
   start: VetCoordinate,
-  end: VetCoordinate
+  end: VetCoordinate,
 ): Record<string, number> => {
   const vertical = start.x === end.x;
   const dimension = vertical ? start.x : start.y;
@@ -52,7 +52,7 @@ export const updateMapStraightLines = (
   return range.reduce((acc, point) => {
     const id = getId(
       vertical ? dimension : init + point,
-      vertical ? init + point : dimension
+      vertical ? init + point : dimension,
     );
     acc[id] = acc[id] ? acc[id] + 1 : 1;
     return acc;

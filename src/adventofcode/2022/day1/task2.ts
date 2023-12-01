@@ -25,7 +25,7 @@ const task = () => {
     {
       current: 0,
       sums: [],
-    }
+    },
   );
 
   const withLast = [...stats.sums, stats.current];

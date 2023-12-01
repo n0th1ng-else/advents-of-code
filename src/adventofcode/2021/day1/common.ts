@@ -3,7 +3,7 @@ type Trend = "up" | "down" | "stay";
 const comparator = (
   lines: string[],
   start: number,
-  getWindow: (lines: string[], start: number) => number | null
+  getWindow: (lines: string[], start: number) => number | null,
 ): Trend => {
   const left = getWindow(lines, start);
   const right = getWindow(lines, start + 1);
@@ -18,7 +18,7 @@ const comparator = (
 
 export const getResult = (
   lines: string[],
-  getWindow: (input: string[], state: number) => number | null
+  getWindow: (input: string[], state: number) => number | null,
 ): number => {
   const res = lines.reduce<{
     ups: number;
@@ -35,7 +35,7 @@ export const getResult = (
     {
       ups: 0,
       downs: 0,
-    }
+    },
   );
 
   return res.downs;

@@ -1,25 +1,38 @@
-import { execWithTime } from "./common.ts";
+import { execWithTime, getSampleFile, getTaskFile } from "./common.ts";
 
 const [year, day, part, sample] = Deno.args;
 
 const isSample = Boolean(sample);
 
-if (!year || !day || !part) {
-  console.error(new Error("The task is not specified!"));
+if (!year) {
+  console.error(
+    new Error(
+      "The yearn is not specified! The correct format is npm run aoc [year] [day] [part] (sample)",
+    ),
+  );
   Deno.exit();
 }
 
-const thisFile = new URL("", import.meta.url).pathname;
-const parts = thisFile.split("/");
-parts.pop();
+if (!year || !day || !part) {
+  console.error(
+    new Error(
+      "The day is not specified! The correct format is npm run aoc [year] [day] [part] (sample)",
+    ),
+  );
+  Deno.exit();
+}
 
-const taskFile = [...parts, year, `day${day}`, `task${part}.ts`].join("/");
-const inputFile = [
-  ...parts,
-  year,
-  `day${day}`,
-  isSample ? "sample.txt" : "task.txt",
-].join("/");
+if (!year || !day || !part) {
+  console.error(
+    new Error(
+      "The part is not specified! The correct format is npm run aoc [year] [day] [part] (sample)",
+    ),
+  );
+  Deno.exit();
+}
+
+const taskFile = getTaskFile(year, day, part);
+const inputFile = getSampleFile(year, day, part, isSample);
 
 console.log("Looking at the executor:", taskFile);
 const module = await import(taskFile);

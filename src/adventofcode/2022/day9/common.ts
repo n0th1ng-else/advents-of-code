@@ -7,15 +7,15 @@ type Rope = Coordinate[];
 
 const MOVE_TYPE = ["R", "U", "L", "D"] as const;
 
-const isMove = (item: string): item is typeof MOVE_TYPE[number] =>
+const isMove = (item: string): item is (typeof MOVE_TYPE)[number] =>
   MOVE_TYPE.some((i) => i === item);
 
 interface Move {
-  direction: typeof MOVE_TYPE[number];
+  direction: (typeof MOVE_TYPE)[number];
   length: number;
 }
 
-const moveHead = (direction: typeof MOVE_TYPE[number], rope: Rope): Rope => {
+const moveHead = (direction: (typeof MOVE_TYPE)[number], rope: Rope): Rope => {
   let head = rope.shift();
   if (!head) {
     return rope;
@@ -82,7 +82,10 @@ const moveTail = (rope: Rope, index: number): Rope => {
   });
 };
 
-const markVisited = (direction: typeof MOVE_TYPE[number], rope: Rope): Rope => {
+const markVisited = (
+  direction: (typeof MOVE_TYPE)[number],
+  rope: Rope,
+): Rope => {
   let r = moveHead(direction, rope);
 
   for (let i = 1; i < r.length; i++) {

@@ -34,7 +34,7 @@ const task = (rows: string[]) => {
     {
       current: [],
       res: [],
-    }
+    },
   );
   return chars.res.reduce((sum, char) => sum + getCharVolume(char), 0);
 };

@@ -17,7 +17,7 @@ const task = () => {
   const items = getStraightLines(parsed);
   const map = items.reduce<Record<string, number>>(
     (acc, { start, end }) => updateMapStraightLines(acc, start, end),
-    {}
+    {},
   );
 
   return calculateBadPlaces(map);
