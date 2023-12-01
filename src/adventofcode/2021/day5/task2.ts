@@ -22,7 +22,7 @@ const getDiagonalLines = (items: VetLine[]): VetLine[] =>
 const updateMapDiagonalLines = (
   map: Record<string, number>,
   start: VetCoordinate,
-  end: VetCoordinate
+  end: VetCoordinate,
 ): Record<string, number> => {
   const xDirection = end.x > start.x;
   const yDirection = end.y > start.y;
@@ -47,13 +47,13 @@ const task = () => {
   const items = getStraightLines(parsed);
   const map = items.reduce<Record<string, number>>(
     (acc, { start, end }) => updateMapStraightLines(acc, start, end),
-    {}
+    {},
   );
   const diagonals = getDiagonalLines(parsed);
 
   const fullMap = diagonals.reduce<Record<string, number>>(
     (acc, { start, end }) => updateMapDiagonalLines(acc, start, end),
-    map
+    map,
   );
 
   return calculateBadPlaces(fullMap);

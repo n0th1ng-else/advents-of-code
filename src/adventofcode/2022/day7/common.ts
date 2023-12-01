@@ -34,7 +34,7 @@ interface FSObject {
 const calcSpace = (
   path: string,
   files: Record<string, FSObject>,
-  rows: string[]
+  rows: string[],
 ): string[] => {
   let row: string | undefined;
   do {

@@ -19,7 +19,7 @@ const getCo2RateAt = (rows: string[], at: number) => {
 
 const getRate = (
   rows: string[],
-  getRateAt: (rows: string[], at: number) => string
+  getRateAt: (rows: string[], at: number) => string,
 ) => {
   const counter = rows[0];
   let rates = [...rows];

@@ -111,7 +111,7 @@ const parseRows = (rows: string[]): Monkey[] => {
 
       return res;
     },
-    { items: [], current: getNewMonkey() }
+    { items: [], current: getNewMonkey() },
   );
 
   return [...monkeys.items, monkeys.current];

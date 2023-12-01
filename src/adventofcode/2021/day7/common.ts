@@ -9,7 +9,7 @@ export const parseInput = (lines: string[]): number[] =>
 
 export const getFuel = (
   crabs: number[],
-  getStepFuel: (start: number, end: number) => number
+  getStepFuel: (start: number, end: number) => number,
 ): number => {
   const sorted = crabs.sort((a, b) => (a > b ? 1 : -1));
   const diff = sorted[sorted.length - 1] - sorted[0];

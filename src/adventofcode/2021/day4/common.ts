@@ -29,7 +29,7 @@ export const parseInput = (rows: string[]): Input => {
     {
       tables: [],
       table: [],
-    }
+    },
   );
 
   return {
@@ -41,8 +41,8 @@ export const parseInput = (rows: string[]): Input => {
 export const updateBoards = (turn: string, boards: Board[]): Board[] => {
   return boards.map((board) =>
     board.map((row) =>
-      row.replace(` ${turn} `, ` ${turn.length === 2 ? " " : ""}x `)
-    )
+      row.replace(` ${turn} `, ` ${turn.length === 2 ? " " : ""}x `),
+    ),
   );
 };
 

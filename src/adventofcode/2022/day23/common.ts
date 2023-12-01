@@ -54,7 +54,7 @@ export const parseId = (id: string): TwoD => {
 
 export const detectMoves = (
   map: Map<string, true>,
-  sides: ElfDirection[]
+  sides: ElfDirection[],
 ): Map<string, string[]> => {
   const res = new Map<string, string[]>();
 
@@ -65,7 +65,7 @@ export const detectMoves = (
       side.cells.some((cell) => {
         const ind: TwoD = [key[0] + cell[0], key[1] + cell[1]];
         return map.get(getId(...ind));
-      })
+      }),
     );
 
     if (!hasNeighbour) {

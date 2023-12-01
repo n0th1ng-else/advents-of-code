@@ -5,7 +5,7 @@ const charge = (octopuses: number[][]): void =>
   octopuses.forEach((line, i) =>
     line.forEach((_, j) => {
       octopuses[i][j] += 1;
-    })
+    }),
   );
 
 const countAndNormalizeFlashes = (octopuses: number[][]): number =>
@@ -19,7 +19,7 @@ const countAndNormalizeFlashes = (octopuses: number[][]): number =>
         }
         return s;
       }, 0),
-    0
+    0,
   );
 
 const triggerOctopus = (octopuses: number[][], ind: number, jnd: number) => {
@@ -32,7 +32,7 @@ const triggerOctopus = (octopuses: number[][], ind: number, jnd: number) => {
         return;
       }
       octopuses[ind + io][jnd + jo] += 1;
-    })
+    }),
   );
   octopuses[ind][jnd] = -1;
 };

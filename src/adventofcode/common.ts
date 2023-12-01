@@ -1,6 +1,8 @@
+import { existsSync } from "https://deno.land/std/fs/mod.ts";
+
 export const readFileByPath = async (
   path: string,
-  isExample = false
+  isExample = false,
 ): Promise<string[]> => {
   const parts = path.split("/");
   parts.pop();
@@ -14,7 +16,7 @@ export const readFileByPath = async (
 
 export const execWithTime = (
   handler: () => number | string,
-  path: string
+  path: string,
 ): void => {
   const parts = path.split("/");
   const year = parts.at(-3);
@@ -34,12 +36,45 @@ export const execWithTime = (
   console.log("%c =====================", white);
   console.log(
     `%c Task execution took: %c ${diff.toFixed(
-      3
+      3,
     )} %c milliseconds. The result was %c ${result}`,
     white,
     volt,
     white,
-    volt
+    volt,
   );
   console.log("%c =====================", white);
+};
+
+const getDayFolder = (year: string, day: string): string[] => {
+  const thisFile = new URL("", import.meta.url).pathname;
+  const parts = thisFile.split("/");
+  parts.pop();
+  return [...parts, year, `day${day}`];
+};
+
+export const getSampleFile = (
+  year: string,
+  day: string,
+  part: string,
+  isSample: boolean,
+): string => {
+  const folder = getDayFolder(year, day);
+  if (!isSample) {
+    return [...folder, "task.txt"].join("/");
+  }
+
+  const taskSample = [...folder, `sample${part}.txt`].join("/");
+  const sample = [...folder, "sample.txt"].join("/");
+  return existsSync(taskSample) ? taskSample : sample;
+};
+
+export const getTaskFile = (
+  year: string,
+  day: string,
+  part: string,
+): string => {
+  const folder = getDayFolder(year, day);
+  const taskFile = [...folder, `task${part}.ts`].join("/");
+  return taskFile;
 };

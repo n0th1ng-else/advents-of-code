@@ -63,7 +63,7 @@ export const buildTask =
         st[cmd.to] = `${to}${diff}`;
         return st;
       },
-      state
+      state,
     );
 
     return new Array(10).fill(null).reduce((acc, item, index) => {

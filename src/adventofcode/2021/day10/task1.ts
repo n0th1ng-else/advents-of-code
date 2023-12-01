@@ -11,7 +11,7 @@ class RowError extends Error {
   constructor(
     message: string,
     public readonly char: string,
-    public readonly index: number
+    public readonly index: number,
   ) {
     super(message);
   }
