@@ -4,8 +4,8 @@
   "description": "Just a dump of any advents of code I am about to go through",
   "main": "index.js",
   "scripts": {
-    "aoc:run": "deno run --allow-read --allow-hrtime ./src/adventofcode/run.ts",
-    "aoc:fetch": "deno run --allow-net --allow-write --allow-read ./src/adventofcode/fetch.ts",
+    "aoc:run": "deno run --allow-read --allow-hrtime ./src/adventofcode/scripts/run.ts",
+    "aoc:fetch": "deno run --allow-net --allow-write --allow-read ./src/adventofcode/scripts/fetch.ts",
     "format": "prettier --write ."
   },
   "repository": {
