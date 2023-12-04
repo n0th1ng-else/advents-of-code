@@ -1,6 +1,7 @@
 /**
  * npm run aoc 2023 3 2
  */
+import type { TaskResult } from "../../types.ts";
 import { ARRAY_OFFSETS_AROUND, CoordinatePair, isNum } from "./common.ts";
 
 const gearsAttachedToChar = (
@@ -19,7 +20,7 @@ const gearsAttachedToChar = (
   });
 };
 
-export const task = (rows: string[]) => {
+export const task = (rows: string[]): TaskResult => {
   const serialNumbers: {
     serial: string;
     gear: CoordinatePair;
@@ -82,5 +83,10 @@ export const task = (rows: string[]) => {
       return arr[0] * arr[1];
     });
 
-  return realGears.reduce((acc, cur) => acc + Number(cur), 0);
+  const result = realGears.reduce((acc, cur) => acc + Number(cur), 0);
+  return {
+    result,
+    sample: 467_835,
+    task: 75_519_888,
+  };
 };

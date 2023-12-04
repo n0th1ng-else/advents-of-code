@@ -1,6 +1,7 @@
 /**
  * npm run aoc 2023 1 2
  */
+import type { TaskResult } from "../../types.ts";
 import { findDigitsAndSum } from "./common.ts";
 
 const WORDS_MAP: Record<string, number> = {
@@ -30,7 +31,7 @@ const getNumStr = (row: string, position: number): string | undefined => {
   return str && `${WORDS_MAP[str]}`;
 };
 
-export const task = (rows: string[]) => {
+export const task = (rows: string[]): TaskResult => {
   const preprocessed = rows.map((row) => {
     let first = "";
     for (let i = 0; i < row.length; i++) {
@@ -57,5 +58,9 @@ export const task = (rows: string[]) => {
     return `${first}${last}`;
   });
 
-  return findDigitsAndSum(preprocessed);
+  return {
+    result: findDigitsAndSum(preprocessed),
+    sample: 281,
+    task: 55_614,
+  };
 };

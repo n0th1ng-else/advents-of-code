@@ -1,9 +1,10 @@
 /**
  * npm run aoc 2023 2 2
  */
+import type { TaskResult } from "../../types.ts";
 import { GamePlay, parseGame } from "./common.ts";
 
-export const task = (rows: string[]) => {
+export const task = (rows: string[]): TaskResult => {
   const games = rows.map((row) => parseGame(row));
   const maxCubes = games
     .map((game) => {
@@ -22,5 +23,10 @@ export const task = (rows: string[]) => {
       Object.values(maxCube).reduce((acc, value) => acc * value, 1),
     );
 
-  return maxCubes.reduce((acc, value) => acc + value, 0);
+  const result = maxCubes.reduce((acc, value) => acc + value, 0);
+  return {
+    result,
+    sample: 2_286,
+    task: 86_036,
+  };
 };

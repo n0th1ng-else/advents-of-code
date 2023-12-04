@@ -50,4 +50,4 @@ lines.pop();
 console.log("Running the task:", taskFile);
 const task = module.default || module.task;
 
-execWithTime(() => task(lines), taskFile);
+execWithTime(() => task(lines), taskFile, isSample ? "sample" : "task");

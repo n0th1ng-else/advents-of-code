@@ -1,6 +1,7 @@
 /**
  * npm run aoc 2023 3 1
  */
+import type { TaskResult } from "../../types.ts";
 import { ARRAY_OFFSETS_AROUND, isNum } from "./common.ts";
 
 const charAttachedToSymbol = (
@@ -18,7 +19,7 @@ const charAttachedToSymbol = (
   });
 };
 
-export const task = (rows: string[]) => {
+export const task = (rows: string[]): TaskResult => {
   const serialNumbers: string[] = [];
 
   for (let i = 0; i < rows.length; i++) {
@@ -48,5 +49,10 @@ export const task = (rows: string[]) => {
     isSerial = false;
   }
 
-  return serialNumbers.reduce((acc, cur) => acc + Number(cur), 0);
+  const result = serialNumbers.reduce((acc, cur) => acc + Number(cur), 0);
+  return {
+    result,
+    sample: 4_361,
+    task: 520_019,
+  };
 };
