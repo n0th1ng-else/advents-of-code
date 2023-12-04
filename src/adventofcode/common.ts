@@ -1,11 +1,7 @@
-import { existsSync } from "https://deno.land/std/fs/mod.ts";
+import { existsSync } from "https://deno.land/std@0.208.0/fs/mod.ts";
+import { CONSOLE_COLORS, getRunCommand } from "./const.ts";
+import { getTaskInput } from "./api.ts";
 import type { TaskResult, StringOrNumber } from "./types.ts";
-
-const CONSOLE_COLORS = {
-  WHITE: "color: #fff",
-  RED: "color: #f00",
-  VOLT: "color: #bada55",
-} as const;
 
 export const readFileByPath = async (
   path: string,
@@ -100,8 +96,8 @@ const getDayFolder = (year: string, day: string): string[] => {
 export const getSampleFile = (
   year: string,
   day: string,
-  part: string,
   isSample: boolean,
+  part = "",
 ): string => {
   const folder = getDayFolder(year, day);
   if (!isSample) {
@@ -142,7 +138,9 @@ export const createDayTasks = (year: string, day: string): void => {
     const task = getTaskFile(year, day, part);
     const taskContent = `
 /**
- * npm run aoc:run ${year} ${day} ${part}
+ * In order to run the task solution:
+ * 1. Set the year in the .env file: AOC_YEAR=${year}
+ * 2. Run the command: ${getRunCommand(day, part, "")}
  */
  import type { TaskResult } from "../../types.ts";
 
@@ -158,5 +156,29 @@ export const task = (rows: string[]): TaskResult => {
     if (!existsSync(task)) {
       Deno.writeTextFileSync(task, taskContent);
     }
+  }
+};
+
+export const createDayContext = async (
+  year: string,
+  day: string,
+  sessionId: string,
+): Promise<void> => {
+  if (!sessionId) {
+    console.error(
+      "%c The aoc sessionId is empty. Make sure to add it in %c.env%c file. Skipping the task context creation.",
+      CONSOLE_COLORS.WHITE,
+      CONSOLE_COLORS.GREEN,
+      CONSOLE_COLORS.WHITE,
+    );
+    return;
+  }
+
+  try {
+    const input = await getTaskInput(year, day, sessionId);
+    const inputFile = getSampleFile(year, day, false);
+    Deno.writeTextFileSync(inputFile, input);
+  } catch (err) {
+    console.error(err);
   }
 };
