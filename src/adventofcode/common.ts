@@ -1,4 +1,11 @@
 import { existsSync } from "https://deno.land/std/fs/mod.ts";
+import type { TaskResult, StringOrNumber } from "./types.ts";
+
+const CONSOLE_COLORS = {
+  WHITE: "color: #fff",
+  RED: "color: #f00",
+  VOLT: "color: #bada55",
+} as const;
 
 export const readFileByPath = async (
   path: string,
@@ -15,8 +22,9 @@ export const readFileByPath = async (
 };
 
 export const execWithTime = (
-  handler: () => number | string,
+  handler: () => StringOrNumber | TaskResult,
   path: string,
+  type: "task" | "sample" | "unknown" = "unknown",
 ): void => {
   const parts = path.split("/");
   const year = parts.at(-3);
@@ -24,26 +32,62 @@ export const execWithTime = (
   const task = parts.at(-1)?.split(".").at(0);
   // Use with --allow-hrtime
   const start = performance.now();
-  const result = handler();
+  const taskResult = handler();
+  const isPlainResult =
+    typeof taskResult === "string" || typeof taskResult === "number";
+  const result: TaskResult = isPlainResult
+    ? {
+        result: taskResult,
+        sample: 0,
+        task: 0,
+      }
+    : taskResult;
   const end = performance.now();
   const diff = end - start;
-  const white = "color: #fff";
-  const volt = "color: #bada55";
-  console.log("%c =====================", white);
-  console.log(`%c Year: %c ${year} `, white, volt);
-  console.log(`%c Day: %c ${day} `, white, volt);
-  console.log(`%c Part: %c ${task} `, white, volt);
-  console.log("%c =====================", white);
+
+  console.log("%c =====================", CONSOLE_COLORS.WHITE);
+  console.log(`%c Year: %c${year} `, CONSOLE_COLORS.WHITE, CONSOLE_COLORS.VOLT);
+  console.log(`%c Day: %c${day} `, CONSOLE_COLORS.WHITE, CONSOLE_COLORS.VOLT);
+  console.log(`%c Part: %c${task} `, CONSOLE_COLORS.WHITE, CONSOLE_COLORS.VOLT);
+  console.log("%c =====================", CONSOLE_COLORS.WHITE);
   console.log(
-    `%c Task execution took: %c ${diff.toFixed(
+    `%c Task execution took: %c${diff.toFixed(
       3,
-    )} %c milliseconds. The result was %c ${result}`,
-    white,
-    volt,
-    white,
-    volt,
+    )}s %cmilliseconds. The result was %c${result.result}`,
+    CONSOLE_COLORS.WHITE,
+    CONSOLE_COLORS.VOLT,
+    CONSOLE_COLORS.WHITE,
+    CONSOLE_COLORS.VOLT,
   );
-  console.log("%c =====================", white);
+  if (type === "task" && result.task) {
+    const isCorrect = result.result === result.task;
+    const color = isCorrect ? CONSOLE_COLORS.VOLT : CONSOLE_COLORS.RED;
+    console.log(
+      `%c The result was %c${
+        isCorrect ? "correct" : "incorrect"
+      } %c(expected: %c${result.task}%c)`,
+      CONSOLE_COLORS.WHITE,
+      color,
+      CONSOLE_COLORS.WHITE,
+      color,
+      CONSOLE_COLORS.WHITE,
+    );
+  }
+  if (type === "sample" && result.sample) {
+    const isCorrect = result.result === result.sample;
+    const color = isCorrect ? CONSOLE_COLORS.VOLT : CONSOLE_COLORS.RED;
+    console.log(
+      `%c The result was %c${
+        isCorrect ? "correct" : "incorrect"
+      } %c(expected: %c${result.sample}%c)`,
+      CONSOLE_COLORS.WHITE,
+      color,
+      CONSOLE_COLORS.WHITE,
+      color,
+      CONSOLE_COLORS.WHITE,
+    );
+  }
+  console.log("%c =====================", CONSOLE_COLORS.WHITE);
 };
 
 const getDayFolder = (year: string, day: string): string[] => {
@@ -72,9 +116,47 @@ export const getSampleFile = (
 export const getTaskFile = (
   year: string,
   day: string,
-  part: string,
+  part: string | number,
 ): string => {
   const folder = getDayFolder(year, day);
   const taskFile = [...folder, `task${part}.ts`].join("/");
   return taskFile;
+};
+
+export const createDayFolder = async (
+  year: string,
+  day: string,
+): Promise<string> => {
+  const folder = getDayFolder(year, day).join("/");
+  if (existsSync(folder)) {
+    return folder;
+  }
+  await Deno.mkdir(folder);
+  return folder;
+};
+
+export const createDayTasks = (year: string, day: string): void => {
+  const parts = [1, 2];
+  for (let i = 0; i < parts.length; i++) {
+    const part = i + 1;
+    const task = getTaskFile(year, day, part);
+    const taskContent = `
+/**
+ * npm run aoc:run ${year} ${day} ${part}
+ */
+ import type { TaskResult } from "../../types.ts";
+
+export const task = (rows: string[]): TaskResult => {
+  return {
+    result: 0,
+    sample: 0,
+    task: 0
+  }
+};
+`;
+
+    if (!existsSync(task)) {
+      Deno.writeTextFileSync(task, taskContent);
+    }
+  }
 };
