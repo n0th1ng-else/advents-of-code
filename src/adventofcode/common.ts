@@ -49,7 +49,7 @@ export const execWithTime = (
   console.log(
     `%c Task execution took: %c${diff.toFixed(
       3,
-    )}s %cmilliseconds. The result was %c${result.result}`,
+    )} %cmilliseconds. The result was %c${result.result}`,
     CONSOLE_COLORS.WHITE,
     CONSOLE_COLORS.VOLT,
     CONSOLE_COLORS.WHITE,
