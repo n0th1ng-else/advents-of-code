@@ -14,3 +14,25 @@ export const parseFork = (row: string): MapFork => {
     R: values.at(1) || "",
   };
 };
+
+export const findForkCycle = (
+  initial: MapFork,
+  commandsPool: string[],
+  forks: Record<string, MapFork>,
+  isFinished: (step: MapFork) => boolean,
+): number => {
+  let cycle = 0;
+  let step = initial;
+  do {
+    commandsPool.forEach((command) => {
+      if (isFinished(step)) {
+        return;
+      }
+      const next = step[command as "L" | "R"];
+      step = forks[next];
+      cycle += 1;
+    });
+  } while (!isFinished(step));
+
+  return cycle;
+};
