@@ -1,9 +1,6 @@
-export type CoordinatePair = {
-  i: number;
-  j: number;
-};
+import type { FlatCoordinate } from "../../common/types.ts";
 
-export const ARRAY_OFFSETS_AROUND: CoordinatePair[] = [
+export const ARRAY_OFFSETS_AROUND: FlatCoordinate[] = [
   {
     i: -1,
     j: -1,

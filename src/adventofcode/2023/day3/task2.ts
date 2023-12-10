@@ -2,13 +2,14 @@
  * npm run aoc 2023 3 2
  */
 import type { TaskResult } from "../../types.ts";
-import { ARRAY_OFFSETS_AROUND, CoordinatePair, isNum } from "./common.ts";
+import type { FlatCoordinate } from "../../common/types.ts";
+import { ARRAY_OFFSETS_AROUND, isNum } from "./common.ts";
 
 const gearsAttachedToChar = (
   rows: string[],
   i: number,
   j: number,
-): CoordinatePair[] => {
+): FlatCoordinate[] => {
   return ARRAY_OFFSETS_AROUND.filter((offset) => {
     const offsetVal = rows[i + offset.i]?.[j + offset.j] ?? "";
     return offsetVal === "*";
@@ -23,13 +24,13 @@ const gearsAttachedToChar = (
 export const task = (rows: string[]): TaskResult => {
   const serialNumbers: {
     serial: string;
-    gear: CoordinatePair;
+    gear: FlatCoordinate;
   }[] = [];
 
   for (let i = 0; i < rows.length; i++) {
     const line = rows.at(i)?.split("") ?? [];
     let bufferNum = "";
-    let bufferGears: CoordinatePair[] = [];
+    let bufferGears: FlatCoordinate[] = [];
 
     for (let j = 0; j < line.length; j++) {
       const char = line.at(j) ?? "";
