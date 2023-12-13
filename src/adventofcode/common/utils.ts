@@ -8,3 +8,6 @@ export const getLeastCommonMultiple = (
 ): number => {
   return (first * seconds) / getGreatestCommonDivisor(first, seconds);
 };
+
+export const getFactorial = (num: number): number =>
+  num ? num * getFactorial(num - 1) : 1;
