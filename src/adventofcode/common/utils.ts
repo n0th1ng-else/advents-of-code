@@ -11,3 +11,15 @@ export const getLeastCommonMultiple = (
 
 export const getFactorial = (num: number): number =>
   num ? num * getFactorial(num - 1) : 1;
+
+export const transponMatrix = <T>(current: T[][]): T[][] => {
+  const mapped: T[][] = [];
+  for (let j = 0; j < current[0].length; j++) {
+    const line: T[] = [];
+    for (let i = 0; i < current.length; i++) {
+      line.push(current[i][j]);
+    }
+    mapped.push(line);
+  }
+  return mapped;
+};
