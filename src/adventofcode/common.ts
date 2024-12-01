@@ -86,10 +86,13 @@ export const execWithTime = (
   console.log("%c =====================", CONSOLE_COLORS.WHITE);
 };
 
-const getDayFolder = (year: string, day: string): string[] => {
+const getDayFolder = (year: string, day?: string): string[] => {
   const thisFile = new URL("", import.meta.url).pathname;
   const parts = thisFile.split("/");
   parts.pop();
+  if (!day) {
+    return [...parts, year];
+  }
   return [...parts, year, `day${day}`];
 };
 
@@ -123,6 +126,10 @@ export const createDayFolder = async (
   year: string,
   day: string,
 ): Promise<string> => {
+  const yearFolder = getDayFolder(year).join("/");
+  if (!existsSync(yearFolder)) {
+    await Deno.mkdir(yearFolder);
+  }
   const folder = getDayFolder(year, day).join("/");
   if (existsSync(folder)) {
     return folder;
@@ -140,7 +147,7 @@ export const createDayTasks = (year: string, day: string): void => {
 /**
  * In order to run the task solution:
  * 1. Set the year in the .env file: AOC_YEAR=${year}
- * 2. Run the command: ${getRunCommand(day, part, "")}
+ * 2. Run the command: ${getRunCommand("run", day, part, "")}
  */
  import type { TaskResult } from "../../types.ts";
 

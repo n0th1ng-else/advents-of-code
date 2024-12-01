@@ -18,7 +18,7 @@ console.log(
 if (!day) {
   console.error(
     new Error(
-      `The day is not specified! The correct format is ${getRunCommand()}`,
+      `The day is not specified! The correct format is ${getRunCommand("run")}`,
     ),
   );
   Deno.exit();
@@ -27,7 +27,9 @@ if (!day) {
 if (!part) {
   console.error(
     new Error(
-      `The part is not specified! The correct format is ${getRunCommand()}`,
+      `The part is not specified! The correct format is ${getRunCommand(
+        "run",
+      )}`,
     ),
   );
   Deno.exit();
