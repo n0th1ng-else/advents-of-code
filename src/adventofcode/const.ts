@@ -8,10 +8,11 @@ export const CONSOLE_COLORS = {
 } as const;
 
 export const getRunCommand = (
+  command: "run" | "fetch",
   day: StringOrNumber = "[day]",
   part: StringOrNumber = "[part]",
   isSample: StringOrNumber = "(sample)",
 ): string => {
-  const res = `npm run aoc:run ${day} ${part}`;
+  const res = `npm run aoc:${command} ${day} ${part}`;
   return isSample ? `${res} true` : res;
 };

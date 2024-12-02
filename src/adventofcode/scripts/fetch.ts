@@ -4,7 +4,7 @@ import {
   createDayTasks,
 } from "../common.ts";
 import { detectSessionId, detectYear } from "../env.ts";
-import { CONSOLE_COLORS } from "../const.ts";
+import { CONSOLE_COLORS, getRunCommand } from "../const.ts";
 
 const sessionId = await detectSessionId();
 
@@ -22,7 +22,12 @@ console.log(
 if (!day) {
   console.error(
     new Error(
-      "The day is not specified! The correct format is npm run aoc [year] [day]",
+      `The day is not specified! The correct format is ${getRunCommand(
+        "fetch",
+        "[day]",
+        "",
+        0,
+      )}`,
     ),
   );
   Deno.exit();
