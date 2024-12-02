@@ -6,7 +6,9 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "pretty": true
+    "pretty": true,
+    "lib": ["esnext", "dom", "deno.ns"],
+    "allowImportingTsExtensions": true
   },
   "include": ["src"]
 }

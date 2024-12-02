@@ -17,11 +17,35 @@ export const readFileByPath = async (
   return lines;
 };
 
+const printAssertion = (
+  actual: StringOrNumber,
+  expected?: StringOrNumber,
+): void => {
+  if (expected) {
+    const isCorrect = actual === expected;
+    const color = isCorrect ? CONSOLE_COLORS.VOLT : CONSOLE_COLORS.RED;
+    console.log(
+      `%c The result was %c${
+        isCorrect ? "CORRECT" : "INCORRECT"
+      } %c(expected: %c${expected}%c)`,
+      CONSOLE_COLORS.WHITE,
+      color,
+      CONSOLE_COLORS.WHITE,
+      color,
+      CONSOLE_COLORS.WHITE,
+    );
+  } else {
+    console.log("%c The expected value is not provided", CONSOLE_COLORS.RED);
+  }
+};
+
 export const execWithTime = (
   handler: () => StringOrNumber | TaskResult,
   path: string,
   type: "task" | "sample" | "unknown" = "unknown",
 ): void => {
+  const isSample = type === "sample";
+
   const parts = path.split("/");
   const year = parts.at(-3);
   const day = parts.at(-2);
@@ -43,7 +67,12 @@ export const execWithTime = (
 
   console.log("%c =====================", CONSOLE_COLORS.WHITE);
   console.log(`%c Year: %c${year} `, CONSOLE_COLORS.WHITE, CONSOLE_COLORS.VOLT);
-  console.log(`%c Day: %c${day} `, CONSOLE_COLORS.WHITE, CONSOLE_COLORS.VOLT);
+  console.log(
+    `%c Day: %c${day} %c(sample run)`,
+    CONSOLE_COLORS.WHITE,
+    CONSOLE_COLORS.VOLT,
+    CONSOLE_COLORS.WHITE,
+  );
   console.log(`%c Part: %c${task} `, CONSOLE_COLORS.WHITE, CONSOLE_COLORS.VOLT);
   console.log("%c =====================", CONSOLE_COLORS.WHITE);
   console.log(
@@ -55,33 +84,11 @@ export const execWithTime = (
     CONSOLE_COLORS.WHITE,
     CONSOLE_COLORS.VOLT,
   );
-  if (type === "task" && result.task) {
-    const isCorrect = result.result === result.task;
-    const color = isCorrect ? CONSOLE_COLORS.VOLT : CONSOLE_COLORS.RED;
-    console.log(
-      `%c The result was %c${
-        isCorrect ? "correct" : "incorrect"
-      } %c(expected: %c${result.task}%c)`,
-      CONSOLE_COLORS.WHITE,
-      color,
-      CONSOLE_COLORS.WHITE,
-      color,
-      CONSOLE_COLORS.WHITE,
-    );
+  if (type === "task") {
+    printAssertion(result.result, result.task);
   }
-  if (type === "sample" && result.sample) {
-    const isCorrect = result.result === result.sample;
-    const color = isCorrect ? CONSOLE_COLORS.VOLT : CONSOLE_COLORS.RED;
-    console.log(
-      `%c The result was %c${
-        isCorrect ? "correct" : "incorrect"
-      } %c(expected: %c${result.sample}%c)`,
-      CONSOLE_COLORS.WHITE,
-      color,
-      CONSOLE_COLORS.WHITE,
-      color,
-      CONSOLE_COLORS.WHITE,
-    );
+  if (isSample) {
+    printAssertion(result.result, result.sample);
   }
   console.log("%c =====================", CONSOLE_COLORS.WHITE);
 };
