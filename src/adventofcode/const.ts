@@ -1,10 +1,10 @@
 import type { StringOrNumber } from "./types.ts";
 
 export const CONSOLE_COLORS = {
-  WHITE: "color: #fff",
-  RED: "color: #f00",
-  GREEN: "color: #0f0",
-  VOLT: "color: #bada55",
+  WHITE: "color: green",
+  RED: "color: red",
+  GREEN: "color: red",
+  VOLT: "color: cyan",
 } as const;
 
 export const getRunCommand = (
