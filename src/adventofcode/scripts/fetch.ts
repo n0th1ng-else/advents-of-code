@@ -33,6 +33,11 @@ if (!day) {
   Deno.exit();
 }
 
+console.log(
+  `%c Creating the folder structure for the %cDay ${day}`,
+  CONSOLE_COLORS.WHITE,
+  CONSOLE_COLORS.VOLT,
+);
 await createDayFolder(yearValue, day);
 createDayTasks(yearValue, day);
 await createDayContext(yearValue, day, sessionId);
