@@ -16,9 +16,9 @@
   "author": "Sergey Nikitin <srg.post@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "3.4.1",
-    "simple-git-hooks": "2.11.1",
-    "typescript": "5.7.2"
+    "prettier": "3.7.4",
+    "simple-git-hooks": "2.13.1",
+    "typescript": "5.9.3"
   },
   "simple-git-hooks": {
     "pre-commit": "npm run format"

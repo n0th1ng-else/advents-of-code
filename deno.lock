@@ -99,9 +99,9 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:prettier@3.4.1",
-        "npm:simple-git-hooks@2.11.1",
-        "npm:typescript@5.7.2"
+        "npm:prettier@3.7.4",
+        "npm:simple-git-hooks@2.13.1",
+        "npm:typescript@5.9.3"
       ]
     }
   }
