@@ -1,15 +1,17 @@
 const runAocApi = async (path: string, sessionId: string): Promise<string> => {
-  const response = await fetch(`https://adventofcode.com/${path}`, {
+  const url = `https://adventofcode.com/${path}`;
+  const response = await fetch(url, {
     headers: { cookie: `session=${sessionId}` },
   });
 
+  const text = await response.text();
   if (!response.ok) {
     throw new Error(
-      `The aoc api responded with status ${response.status} ${response.statusText}`,
+      `Tried to fetch ${url}, but it responded with status ${response.status} ${response.statusText}`,
+      { cause: { responseText: text } },
     );
   }
 
-  const text = await response.text();
   return text;
 };
 

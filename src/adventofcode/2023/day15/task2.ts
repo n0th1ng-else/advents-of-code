@@ -22,6 +22,7 @@ const sumBox = (boxId: string, lenses: Lens[]): number => {
   }, 0);
 };
 
+// @ts-expect-error it's okay
 const renderBoxes = (boxes: Record<string, Lens[]>, lens: Lens): void => {
   console.log("\n=====");
   console.log(

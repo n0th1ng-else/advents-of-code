@@ -193,6 +193,8 @@ export const createDayContext = async (
     const inputFile = getSampleFile(year, day, false);
     Deno.writeTextFileSync(inputFile, input);
   } catch (err) {
-    console.error(err);
+    console.error(
+      new Error("Unable to create the input file. Ignoring...", { cause: err }),
+    );
   }
 };
